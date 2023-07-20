@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIRIUS.Rapor.WebApi", "SIRIUS.Rapor.WebApi\SIRIUS.Rapor.WebApi.csproj", "{D9E8A580-046D-4026-ABDF-628E2789CC9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIRIUS.Rapor.Data", "SIRIUS.Rapor.Data\SIRIUS.Rapor.Data.csproj", "{141599F8-368D-43BB-AED2-5D34966228AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9E8A580-046D-4026-ABDF-628E2789CC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E8A580-046D-4026-ABDF-628E2789CC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E8A580-046D-4026-ABDF-628E2789CC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E8A580-046D-4026-ABDF-628E2789CC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141599F8-368D-43BB-AED2-5D34966228AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141599F8-368D-43BB-AED2-5D34966228AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141599F8-368D-43BB-AED2-5D34966228AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141599F8-368D-43BB-AED2-5D34966228AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C435F33A-CC85-480C-A50A-90C130944439}
+	EndGlobalSection
+EndGlobal

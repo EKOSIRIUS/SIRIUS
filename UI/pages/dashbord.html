@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EKO - Raporlar</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="\plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="\dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Anasayfa</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="raporlar.html" class="brand-link">
+      <img src="../dist/img/ekofaktoring.png" alt="AdminLTE Logo" class="brand-image " >
+      <span class="brand-text font-weight-light" style="color: white;">Eko Faktoring</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../dist/img/user.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Kullanıcı</a>
+        </div>
+      </div>
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="../index.html" class="nav-link">
+              <i class="nav-icon fas fa-industry"></i>
+              <p>
+                Raporlar
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/dashbord.html" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                KPI
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Mobil
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../forms/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Firma Tanımlama</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../forms/advanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Faiz Hesaplama</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../forms/editors.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Şube Bilgi Giriş</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Dosya İşlemleri
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../forms/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dosyaları Görüntüle</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../forms/advanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dosya Ekle</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../forms/editors.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dosya Sil</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  
+
+
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Eko Faktoring A.Ş. - Bilgi İşlem</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Anasayfa</a></li>
+              <li class="breadcrumb-item active">KPI</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-money-check-dollar-pen"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Gelen İşlem Adedi</span>
+                <span class="info-box-number">
+                  15
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Onaylanan İşlem Adedi</span>
+                <span class="info-box-number">10</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Reddedilen İşlem Adedi</span>
+                <span class="info-box-number">5</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Toplam Bordro Tutarı</span>
+                <span class="info-box-number">2.000.000,36</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Hedef Projeksiyonu</h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                      <a href="#" class="dropdown-item">Action</a>
+                      <a href="#" class="dropdown-item">Another action</a>
+                      <a href="#" class="dropdown-item">Something else here</a>
+                      <a class="dropdown-divider"></a>
+                      <a href="#" class="dropdown-item">Separated link</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <!-- /.col -->
+                  <div class="col-md-12">
+                    <p class="text-center">
+                      <strong>Hedef Tamamlama</strong>
+                    </p>
+
+                    <div class="progress-group">
+                     Günlük Plasman Hedefi
+                      <span class="float-right"><b>5.000.000</b>/10.000.000</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-primary" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+
+                    <div class="progress-group">
+                      Günlük İşlem Adedi
+                      <span class="float-right"><b>15</b>/30</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-danger" style="width: 50%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      <span class="progress-text">Ortalama Faiz</span>
+                      <span class="float-right"><b>70</b>/80</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-success" style="width: 900%"></div>
+                      </div>
+                    </div>
+
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                      Send Inquiries
+                      <span class="float-right"><b>250</b>/500</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                      </div>
+                    </div>
+                    <!-- /.progress-group -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- ./card-body -->
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
+                      <h5 class="description-header">$35,210.43</h5>
+                      <span class="description-text">TOTAL REVENUE</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
+                      <h5 class="description-header">$10,390.90</h5>
+                      <span class="description-text">TOTAL COST</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
+                      <h5 class="description-header">$24,813.53</h5>
+                      <span class="description-text">TOTAL PROFIT</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                      <h5 class="description-header">1200</h5>
+                      <span class="description-text">GOAL COMPLETIONS</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <div class="col-md-12">
+
+            <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Son İşlemler</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Firma Adı</th>
+                      <th>Status</th>
+                      <th>Popularity</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lastProceses">
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">135489</a></td>
+                      <td>Call of Duty IV</td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>iPhone 6 Plus</td>
+                      <td><span class="badge badge-danger">Delivered</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-info">Processing</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>iPhone 6 Plus</td>
+                      <td><span class="badge badge-danger">Delivered</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                      <td>Call of Duty IV</td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+
+          
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+
+
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- Default to the left -->
+    <strong>Eko Faktoring &copy; 2023 <a href="https://www.ekofactoring.com"></a></strong> Tüm Hakları Saklıdır.
+  </footer>
+</div>
+
+<script src="\plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="\plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="\plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="\dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="\plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="\plugins/raphael/raphael.min.js"></script>
+<script src="\plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="\plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="\plugins/chart.js/Chart.min.js"></script>
+
+<script src="\dist/js/pages/dashboard2.js"></script>
+
+  <script>
+    // Chart.register(ChartDataLabels);
+    const defaultBackGroundColor = 'rgba(231,125,38,0.8)';
+    const defaultBorderColor = 'rgba(0,0,0,0.8)';
+
+    const ctxplasmanVeAktifMusteri = document.getElementById('plasmanVeAktifMusteri').getContext('2d');
+    const ctxislemHacmi = document.getElementById('islemHacmi').getContext('2d');;
+    const ctxyeniIslem = document.getElementById('yeniIslem').getContext('2d');;
+    const ctxriskKonsantrasyonu = document.getElementById('riskKonsantrasyonu').getContext('2d');;
+    const ctxspread = document.getElementById('spread').getContext('2d');;
+
+    let response = new Object(); 
+    let plasman =  new Array() ;
+    let ortalamaPlasman = [] ;
+    let islemhacimleri = [];
+    let musteri = [];
+    let yeniIslemMusteriTutari= []
+    let yeniMusteriAdedi=[];
+
+
+    let toplam=[];
+    let ankara=[];
+    let konya=[];
+    let trakya=[];
+    let kobi=[];
+    let ticari=[];
+
+    let bool1 = false;
+    let bool2 = false;
+    let bool3 = false;
+    let bool4 = false;
+    let bool5 = false;
+    let bool6 = false;
+
+
+    const data = fetch('https://localhost:7105/api/Raporlar/PazarlamaPerformans?yil=2023').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            islemhacimleri.push(element.islemHacmi);
+            plasman.push(element.plasman);
+            ortalamaPlasman.push(element.ortalamaPlasman);
+            musteri.push(element.plasmanMusteriAdedi);
+            yeniIslemMusteriTutari.push(element.yeniIslemMusteriTutari);
+            yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi);
+          });
+          chartTanımla();
+    });
+
+
+    const data1 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=1').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            toplam.push(element.risk);
+          });
+          bool1=true;
+          kontrol()
+    });
+    const data2 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=2').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            ankara.push(element.risk);
+          });
+          bool2=true;
+          kontrol()
+    });
+    const data3 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=3').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            konya.push(element.risk);
+          });
+          bool3=true;
+          kontrol()
+    });
+    const data4 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=4').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            trakya.push(element.risk);
+          });
+          bool4=true;
+          kontrol()
+    });
+    const data5 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=5').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            kobi.push(element.risk);
+          });
+          bool5=true;
+          kontrol()
+    });
+    const data6 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=6').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            ticari.push(element.risk);
+          });
+          bool6=true;
+          kontrol()
+    });
+    
+
+
+
+
+  </script>
+</body>
+</html>
