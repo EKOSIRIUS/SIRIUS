@@ -191,7 +191,7 @@
         <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-money-check-dollar-pen"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-money-check"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Gelen İşlem Adedi</span>
@@ -209,8 +209,8 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Onaylanan İşlem Adedi</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-text">Onaylanan İşlem Tutarı</span>
+                <span class="info-box-number" id="OnaylananIslem">0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -223,11 +223,11 @@
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fa-solid fa-hand"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Reddedilen İşlem Adedi</span>
-                <span class="info-box-number">5</span>
+                <span class="info-box-text">Reddedilen İşlem Tutarı</span>
+                <span class="info-box-number" id="OnaylanmayanIslem">0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -236,7 +236,7 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fa-solid fa-money-check-dollar"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Toplam Bordro Tutarı</span>
@@ -382,7 +382,7 @@
 
             <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title">Son İşlemler</h3>
+                <h3 class="card-title">Son 10 İşlem</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -396,7 +396,7 @@
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <div class="table-responsive">
-                  <table class="table m-0">
+                  <table class="table m-0"  id="lastProceses">
                     <thead>
                     <tr>
                       <th>İslem No</th>
@@ -406,48 +406,9 @@
                       <th>Durum</th>
                     </tr>
                     </thead>
-                    <tbody id="lastProceses">
-                    <tr>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      
-                    </tr>
-                    <tr>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      
-                    </tr>
-                    
+                    <tbody>
+
+
                     </tbody>
                   </table>
                 </div>
@@ -499,45 +460,98 @@
 
   <script>
     
-    let ToplamBordroTutari = 0;
-    let IslemAdedi = 0;
+    let ToplamBordroTutari = [];
+    let IslemAdedi = [];
     let OnayDurum = [];
- 
-
+    const gelen = document.getElementById('GelenIslemAdedi');
+    const toplam = document.getElementById('ToplamBordroTutari');
+    const onaylanan = document.getElementById('OnaylananIslem');
+    const onaylanmayan = document.getElementById('OnaylanmayanIslem');
 
     const data = fetch('https://localhost:7105/api/Raporlar/ToplamBordroTutari').then(response => response.json()).then(function(datas){
       datas.forEach(element => {
-            ToplamBordroTutari =element.toplamBordroTutari;
+            ToplamBordroTutari.push(element.toplamBordroTutari);
           });
-          console.log(ToplamBordroTutari);
-          
+          toplam.innerHTML =ToplamBordroTutari.toLocaleString(undefined,{ minimumFractionDigits: 2 });
     });
 
     const data2 = fetch('https://localhost:7105/api/Raporlar/IslemAdedi').then(response => response.json()).then(function(datas){
       datas.forEach(element => {
-        IslemAdedi =element.islemAdedi;
+            IslemAdedi.push(element.islemAdedi);
           });
-          console.log(IslemAdedi);
+          gelen.innerText =IslemAdedi;
           
     });
 
     const data3 = fetch('https://localhost:7105/api/Raporlar/OnayDurumuTutari').then(response => response.json()).then(function(datas){
       datas.forEach(element => {
-        OnayDurum =element.islemBordoTutari;
+        OnayDurum.push(element.islemBordroTutari);
           });
           console.log(OnayDurum);
-          
+          onaylanan.innerHTML =OnayDurum[0].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString();
+          onaylanmayan.innerHTML =OnayDurum[1].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString();
+    });     
+
+
+
+
+    let IslemNo = [];
+    let FirmaNo = [];
+    let FirmaAdi = [];
+    let BordroTutar = [];
+    let Durum = [];
+
+    const data4 = fetch('https://localhost:7105/api/Raporlar/SonIslemler').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+        IslemNo.push(element.islemno);
+        FirmaNo.push(element.firmano);
+        FirmaAdi.push(element.firmaadi);
+        BordroTutar.push(element.bordrotutar);
+        Durum.push(element.bipekkod4);
+          });
+          sonIslemlerDoldur();
     });
 
-    const gelen = document.getElementById('GelenIslemAdedi');
-    gelen.innerHTML =IslemAdedi;
 
-    const toplam = document.getElementById('ToplamBordroTutari');
-    toplam.innerHTML =ToplamBordroTutari;
-
-    // const deger = document.getElementById('GelenIslemAdedi');
-    // deger.innerHTML =IslemAdedi;
-     
+    function sonIslemlerDoldur() {
+      var tableRef = document.getElementById('lastProceses').getElementsByTagName('tbody')[0];
+      for (let index = 0; index < IslemNo.length; index++){
+        //insert Row
+        if(Durum[index]== "Onaylanmadı"){
+          tableRef.insertRow().innerHTML = 
+        "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
+        "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +BordroTutar[index]+"</span></td>"+
+        "<td><span style='font-size:14px;' class='badge badge-danger'>" +Durum[index]+"</span></td>";
+        }
+        else if(Durum[index]== "Onay Bekliyor"){
+          tableRef.insertRow().innerHTML = 
+        "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
+        "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +BordroTutar[index]+"</span></td>"+
+        "<td><span style='font-size:14px;' class='badge badge-warning'>" +Durum[index]+"</span></td>";
+        }
+        else if(Durum[index]== "Onaylandı"){
+          tableRef.insertRow().innerHTML = 
+        "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
+        "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +BordroTutar[index]+"</span></td>"+
+        "<td><span style='font-size:14px;' class='badge badge-success'>" +Durum[index]+"</span></td>";
+        }
+        else if(Durum[index]== "Ödeme Yapıldı"){
+          tableRef.insertRow().innerHTML = 
+        "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
+        "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +BordroTutar[index]+"</span></td>"+
+        "<td><span style='font-size:14px;' class='badge badge-info'>" +Durum[index]+"</span></td>";
+        }
+        
+    }
+    }
 
 
   </script>
