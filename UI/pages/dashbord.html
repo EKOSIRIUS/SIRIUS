@@ -195,8 +195,8 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Gelen İşlem Adedi</span>
-                <span class="info-box-number">
-                  15
+                <span class="info-box-number" id="GelenIslemAdedi">
+                  0
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -240,7 +240,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Toplam Bordro Tutarı</span>
-                <span class="info-box-number">2.000.000,36</span>
+                <span class="info-box-number" id ="ToplamBordroTutari">0</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -399,69 +399,55 @@
                   <table class="table m-0">
                     <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Firma Adı</th>
-                      <th>Status</th>
-                      <th>Popularity</th>
+                      <th>İslem No</th>
+                      <th>Firma No</th>
+                      <th>Firma Adi</th>
+                      <th>Bordro Tutar</th>
+                      <th>Durum</th>
                     </tr>
                     </thead>
                     <tbody id="lastProceses">
                     <tr>
-                      <td><a href="../pages/examples/invoice.html">135489</a></td>
-                      <td>Call of Duty IV</td>
                       <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="../pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
                       <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      
                     </tr>
+                    <tr>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      
+                    </tr>
+                    
                     </tbody>
                   </table>
                 </div>
@@ -510,101 +496,48 @@
 <!-- ChartJS -->
 <script src="../plugins/chart.js/Chart.min.js"></script>
 
-<script src="../dist/js/pages/dashboard2.js"></script>
 
   <script>
-    // Chart.register(ChartDataLabels);
-    const defaultBackGroundColor = 'rgba(231,125,38,0.8)';
-    const defaultBorderColor = 'rgba(0,0,0,0.8)';
-
-    const ctxplasmanVeAktifMusteri = document.getElementById('plasmanVeAktifMusteri').getContext('2d');
-    const ctxislemHacmi = document.getElementById('islemHacmi').getContext('2d');;
-    const ctxyeniIslem = document.getElementById('yeniIslem').getContext('2d');;
-    const ctxriskKonsantrasyonu = document.getElementById('riskKonsantrasyonu').getContext('2d');;
-    const ctxspread = document.getElementById('spread').getContext('2d');;
-
-    let response = new Object(); 
-    let plasman =  new Array() ;
-    let ortalamaPlasman = [] ;
-    let islemhacimleri = [];
-    let musteri = [];
-    let yeniIslemMusteriTutari= []
-    let yeniMusteriAdedi=[];
-
-
-    let toplam=[];
-    let ankara=[];
-    let konya=[];
-    let trakya=[];
-    let kobi=[];
-    let ticari=[];
-
-    let bool1 = false;
-    let bool2 = false;
-    let bool3 = false;
-    let bool4 = false;
-    let bool5 = false;
-    let bool6 = false;
-
-
-    const data = fetch('https://localhost:7105/api/Raporlar/PazarlamaPerformans?yil=2023').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            islemhacimleri.push(element.islemHacmi);
-            plasman.push(element.plasman);
-            ortalamaPlasman.push(element.ortalamaPlasman);
-            musteri.push(element.plasmanMusteriAdedi);
-            yeniIslemMusteriTutari.push(element.yeniIslemMusteriTutari);
-            yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi);
-          });
-          chartTanımla();
-    });
-
-
-    const data1 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=1').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            toplam.push(element.risk);
-          });
-          bool1=true;
-          kontrol()
-    });
-    const data2 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=2').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            ankara.push(element.risk);
-          });
-          bool2=true;
-          kontrol()
-    });
-    const data3 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=3').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            konya.push(element.risk);
-          });
-          bool3=true;
-          kontrol()
-    });
-    const data4 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=4').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            trakya.push(element.risk);
-          });
-          bool4=true;
-          kontrol()
-    });
-    const data5 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=5').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            kobi.push(element.risk);
-          });
-          bool5=true;
-          kontrol()
-    });
-    const data6 =  fetch('https://localhost:7105/api/Raporlar/PlasmanDetay?yil=2023&secim=6').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-            ticari.push(element.risk);
-          });
-          bool6=true;
-          kontrol()
-    });
     
+    let ToplamBordroTutari = 0;
+    let IslemAdedi = 0;
+    let OnayDurum = [];
+ 
 
 
+    const data = fetch('https://localhost:7105/api/Raporlar/ToplamBordroTutari').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+            ToplamBordroTutari =element.toplamBordroTutari;
+          });
+          console.log(ToplamBordroTutari);
+          
+    });
+
+    const data2 = fetch('https://localhost:7105/api/Raporlar/IslemAdedi').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+        IslemAdedi =element.islemAdedi;
+          });
+          console.log(IslemAdedi);
+          
+    });
+
+    const data3 = fetch('https://localhost:7105/api/Raporlar/OnayDurumuTutari').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+        OnayDurum =element.islemBordoTutari;
+          });
+          console.log(OnayDurum);
+          
+    });
+
+    const gelen = document.getElementById('GelenIslemAdedi');
+    gelen.innerHTML =IslemAdedi;
+
+    const toplam = document.getElementById('ToplamBordroTutari');
+    toplam.innerHTML =ToplamBordroTutari;
+
+    // const deger = document.getElementById('GelenIslemAdedi');
+    // deger.innerHTML =IslemAdedi;
+     
 
 
   </script>
