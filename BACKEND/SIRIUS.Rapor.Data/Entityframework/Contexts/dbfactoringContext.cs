@@ -19,6 +19,10 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
         }
         public DbSet<eko_PazarlamaPerformansRaporu> eko_PazarlamaPerformansRaporu { get; set; }
         public DbSet<sel_eko_plasmandetay> sel_Eko_Plasmandetay { get; set; }
+        public DbSet<eko_IslemAdedi> eko_islemAdedi { get; set; }
+        public DbSet<eko_IslemOnayDurumTutari> eko_IslemOnayDurumTutari { get; set; }
+        public DbSet<eko_ToplamBordroTutari> eko_ToplamBordroTutari { get; set; }
+        public DbSet<eko_SonIslemler> eko_SonIslemler { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=172.34.1.15;Initial Catalog=dbfactoringtest;Persist Security Info=False;User ID=bisuser;Password=p@ssword1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
@@ -28,6 +32,10 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
         {
             modelBuilder.Entity<eko_PazarlamaPerformansRaporu>().HasNoKey();
             modelBuilder.Entity<sel_eko_plasmandetay>().HasNoKey();
+            modelBuilder.Entity<eko_IslemAdedi>().HasNoKey();
+            modelBuilder.Entity<eko_IslemOnayDurumTutari>().HasNoKey();
+            modelBuilder.Entity<eko_ToplamBordroTutari>().HasNoKey();
+            modelBuilder.Entity<eko_SonIslemler>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }
