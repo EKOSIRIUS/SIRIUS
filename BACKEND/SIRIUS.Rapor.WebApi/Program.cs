@@ -60,7 +60,7 @@ namespace SIRIUS.Rapor.WebApi
                 {
                     options.Cookie.Domain = "https://sirius.ekofactoring.com";
                     options.Cookie.Name = "EKO_WEB_Cookie";
-                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.SameSite = SameSiteMode.Strict;
                     options.LoginPath = "index";
                     options.LogoutPath = "index";
                 });
