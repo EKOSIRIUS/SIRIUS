@@ -30,7 +30,7 @@ namespace SIRIUS.Rapor.Data.Repositories
         {
             using (var context = new dbfactoringContext())
             {
-                var data = context.eko_islemAdedi.FromSqlRaw($"SELECT TOP 50000 COALESCE(COUNT(islemno), 0) AS [islemAdedi] FROM (SELECT *, CASE onaylilikdurum WHEN 1 THEN 'Onaylandı'         ELse 'Onaylanmadı' END as OnayDurum, CASE bipekkod3 When 4 Then 'Ödendi, Gerçekleşti' Else CASE onaylilikdurum when 0 Then 'Onaysız - Gerçekleşmeyecek' Else 'Onaylı - ?'           End END as OdemeDurum from islemtakip (nolock)  where year(islemtarihiyil) = year(GETDATE())) AS virtual_table WHERE year(islemtarihi) =year(GETDATE()) and MONTH(islemtarihi) =month(GETDATE()) and day(islemtarihi) = day(GETDATE()) ;").ToList();
+                var data = context.eko_islemAdedi.FromSqlRaw($"SELECT TOP 50000 COALESCE(COUNT(islemno), 0) AS [islemAdedi] FROM (SELECT *, CASE onaylilikdurum WHEN 1 THEN 'Onaylandı'         ELse 'Onaylanmadı' END as OnayDurum, CASE bipekkod3 When 4 Then 'Ödendi, Gerçekleşti' Else CASE onaylilikdurum when 0 Then 'Onaysız - Gerçekleşmeyecek' Else 'Onaylı - ?'           End END as OdemeDurum from islemtakip (nolock)  where islemtarihiyil = year(GETDATE())) AS virtual_table WHERE year(islemtarihi) =year(GETDATE()) and MONTH(islemtarihi) =month(GETDATE()) and day(islemtarihi) = day(GETDATE()) ;").ToList();
                 return data;
             }
 

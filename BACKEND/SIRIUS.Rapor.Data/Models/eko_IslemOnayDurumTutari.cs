@@ -9,6 +9,6 @@ namespace SIRIUS.Rapor.Data.Models
     public class eko_IslemOnayDurumTutari
     {
         public string onayDurumu { get; set; }
-        public decimal islemBordroTutari { get; set; }
+        public double islemBordroTutari { get; set; }
     }
 }
