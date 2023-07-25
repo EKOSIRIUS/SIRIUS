@@ -373,6 +373,32 @@
           </div>
           <!-- /.col -->
         </div>
+
+        <div >
+          <!-- USERS LIST -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Pazarlamacı Plasmanları(Aylık)</h3>
+
+              <div class="card-tools">
+                
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0" >
+              <ul class="users-list clearfix" id="pazarlamaciListe">
+
+              </ul>
+              <!-- /.users-list -->
+            </div>
+            <!-- /.card-body -->
+            <!-- /.card-footer -->
+          </div>
+          <!--/.card -->
+        </div>
         <!-- /.row -->
 
         <!-- Main row -->
@@ -553,6 +579,36 @@
     }
     }
 
+
+    let adi = [];
+    let sube = [];
+    let plasman = [];
+    const data5 = fetch('https://localhost:7105/api/Raporlar/PazarlamaPlasman').then(response => response.json()).then(function(datas){
+      datas.forEach(element => {
+        sube.push(element.aciklama);
+        plasman.push(element.plasman);
+        adi.push(element.adi);
+
+          });
+          pazarlamaciDoldur();
+          console.log(plasman);
+          console.log(sube);
+          console.log(adi);
+    });
+
+    function pazarlamaciDoldur() {
+      var listeRef = document.getElementById('pazarlamaciListe');
+      for (let index = 0; index < 8; index++){
+        //insert Row
+        listeRef.innerHTML = 
+        "<li>" + 
+        "<a class='users-list-name' >"+ adi[index] +"</a>"+
+        "<a class='users-list-name' >"+ sube[index] +"</a>"+
+        "<span class='users-list-date'>"+  plasman[index] +"</span>"+
+        "</li>";
+
+    }
+    }
 
   </script>
 </body>

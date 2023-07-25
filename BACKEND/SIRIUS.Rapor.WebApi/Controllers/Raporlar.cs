@@ -92,5 +92,19 @@ namespace SIRIUS.Rapor.WebApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult PazarlamaPlasman()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.PazarlamaPlasman();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }

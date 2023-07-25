@@ -69,5 +69,16 @@ namespace SIRIUS.Rapor.Data.Repositories
 
             return new List<eko_SonIslemler>();
         }
+
+        public List<eko_PazarlamaPlasman> PazarlamaPlasman()
+        {
+            using (var context = new dbfactoringContext())
+            {
+                var data = context.eko_PazarlamaPlasman.FromSqlRaw($"\t select trim(deneme.aciklama) aciklama,k.adi, sum(convert(numeric(20,2),deneme.bakiye)) plasman from (\r\n\tselect  tablo.aciklama,tablo.kullaniciid, bakiye from  eko_PazarlamaPerformansDetay ep \r\n\tleft join (\r\n\tselect firmano,aciklama,kullaniciid from firmadetay fd \r\n\tleft join(\r\n\t\tselect bc.bipaciklama aciklama,k.adi adi,k.id id from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü'\r\n\t\t) kullaniciTablo\r\n\t\ton kullaniciTablo.id = fd.kullaniciid\r\n\t)tablo\r\n\ton tablo.firmano = ep.firmaNo\r\n\twhere year(ep.tarih) = year(GETDATE()) and MONTH(ep.tarih) = month(GETDATE())  ) deneme  inner join kullanici k on deneme.kullaniciid=k.id  where deneme.aciklama is not null group by deneme.aciklama,k.adi\r\n").ToList();
+                return data;
+            }
+
+            return new List<eko_PazarlamaPlasman>();
+        }
     }
 }
