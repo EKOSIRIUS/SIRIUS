@@ -106,5 +106,62 @@ namespace SIRIUS.Rapor.WebApi.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet]
+        public IActionResult PazarlamaciIslemHacimleri()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.PazarlamaciIslemHacimleri();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult YeniMusteri()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.YeniMusteri();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        public IActionResult Ziyaret()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.Ziyaret();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult HedefData()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.HedefData();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }

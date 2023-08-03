@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SIRIUS.Rapor.Data.Models
 {
-    public class eko_IslemAdedi
+    public class eko_YeniMusteri
     {
-        public int islemAdedi { get; set; }
-        public int gerceklesen { get; set; }
+        public int ay { get; set; }
+        public int Adet { get; set; }
     }
 }

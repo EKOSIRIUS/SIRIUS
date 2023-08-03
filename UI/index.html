@@ -98,35 +98,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Mobil
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Firma Tanımlama</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Faiz Hesaplama</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Şube Bilgi Giriş</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
@@ -235,6 +207,25 @@
           </div>
           <div class="card card-dark">
             <div class="card-header">
+              <h3 class="card-title">Gelir(Kar)</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body" style="background-image:radial-gradient(#585858, #2a2a2a);">
+              <div class="chart">
+                <canvas id="gelirKar" style="min-height: 250px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="card card-dark">
+            <div class="card-header">
               <h3 class="card-title">Yeni İşlem</h3>
 
               <div class="card-tools">
@@ -290,6 +281,10 @@
               </div>
             </div>
           </div>
+
+
+
+
         </div>
       </div>
     </div>
@@ -322,12 +317,12 @@
 
     const aktifUrl = testUrl;
 
-    console.log(ChartDataLabels);
     const defaultBackGroundColor = 'rgba(231,125,38,0.8)';
     const defaultBorderColor = 'rgba(0,0,0,0.8)';
 
     const ctxplasmanVeAktifMusteri = document.getElementById('plasmanVeAktifMusteri').getContext('2d');
     const ctxislemHacmi = document.getElementById('islemHacmi').getContext('2d');;
+    const ctxgelirKar = document.getElementById('gelirKar').getContext('2d');;
     const ctxyeniIslem = document.getElementById('yeniIslem').getContext('2d');;
     const ctxriskKonsantrasyonu = document.getElementById('riskKonsantrasyonu').getContext('2d');;
     const ctxspread = document.getElementById('spread').getContext('2d');;
@@ -336,9 +331,11 @@
     let plasman =  new Array() ;
     let ortalamaPlasman = [] ;
     let islemhacimleri = [];
+    let aylikortalamasatis = [];
     let musteri = [];
     let yeniIslemMusteriTutari= []
     let yeniMusteriAdedi=[];
+    let gelirKar = [];
 
 
     let toplam=[];
@@ -355,16 +352,19 @@
     let bool5 = false;
     let bool6 = false;
 
-
+   
     const data = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil=2023').then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             islemhacimleri.push(element.islemHacmi);
+            aylikortalamasatis.push(element.islemKatkiliOran)
             plasman.push(element.plasman);
             ortalamaPlasman.push(element.ortalamaPlasman);
             musteri.push(element.plasmanMusteriAdedi);
             yeniIslemMusteriTutari.push(element.yeniIslemMusteriTutari);
             yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi); 
+            gelirKar.push(element.Gelir)
           });
+          console.log(aylikortalamasatis);
           chartTanımla();
     });
 
@@ -413,44 +413,12 @@
     });
     
 
-    var opt = {
-    events: false,
-    tooltips: {
-        enabled: false
-    },
-    hover: {
-        animationDuration: 0
-    },
-    animation: {
-        duration: 1,
-        onComplete: function () {
-            var chartInstance = this.chart,
-                ctx = chartInstance.ctx;
-            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'bottom';
-
-            this.data.datasets.forEach(function (dataset, i) {
-                var meta = chartInstance.controller.getDatasetMeta(i);
-                meta.data.forEach(function (bar, index) {
-                    var data = dataset.data[index];
-                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                });
-            });
-        }
-    }
-  };
-
-
   var plasmanaktif;
   var islemhacmi;
   var yeniislem;
   var konsantrasyon;
   var spread;
- 
-  
-
-
+  var gelirKarChart;
 
   </script>
     <script>
@@ -459,8 +427,6 @@
           chartPlasmanDetay();
         }
       }
-
-    
 
      function chartTanımla(){
 
@@ -552,10 +518,77 @@
         labels  : ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
         datasets: [
           {
+
             label: 'İşlem Hacmi',
+            borderColor: defaultBorderColor,
+            backgroundColor: defaultBackGroundColor,
+            order :2,
+            data: islemhacimleri,
+            pointRadius         :  false,
+            yAxisID             :"y"
+          } ,
+          {
+            label                 : 'Ortalama Satış Oranı',
+              type                : 'line',
+              backgroundColor     : 'rgb(231,125,38)',
+              pointStyle          : 'circle',
+              pointRadius         : 5,
+              pointHoverRadius    : 15,
+              pointHighlightStroke: 'rgb(231,125,38)',
+              tension             : 0,
+              order               : 1,
+              data                : aylikortalamasatis,
+              yAxisID               :"y1"
+          }
+      ]
+      },
+      options: {
+
+        color: '#ffffff',
+        responsive              : true,
+        maintainAspectRatio     : false,
+        datasetFill             : false,
+        maintainAspectRatio: false,
+        responsive: true,
+        scales: {
+              y1: {
+                display: true,
+                position: 'right',
+                type:"linear",
+                
+              },
+              y:{
+                
+                display: true,
+                position: 'left',
+              }
+            },
+        plugins: {
+                datalabels: { // This code is used to display data values
+                    anchor: 'center',
+                    align: 'center',
+                    formatter: Math.round,
+                    font: {
+                        weight: 'normal',
+                        size: 0
+                    }
+                }
+              }
+        
+      }
+    });
+
+
+    gelirKarChart = new Chart(ctxgelirKar, {
+      type: 'bar',
+      data: {
+        labels  : ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
+        datasets: [
+          {
+            label: 'Gelir',
             borderColor: defaultBackGroundColor,
             backgroundColor: defaultBackGroundColor,
-            data: islemhacimleri,
+            data: gelirKar,
           } 
       ]
       },
@@ -719,6 +752,7 @@
               musteri.push(element.plasmanMusteriAdedi);
               yeniIslemMusteriTutari.push(element.yeniIslemMusteriTutari);
               yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi);
+              gelirKar.push(element.Gelir)
             });
             chartTanımla();
         });
@@ -790,9 +824,9 @@
         yeniislem.destroy();
         konsantrasyon.destroy();
         spread.destroy();
+        gelirKarChart.destroy();
       }
  
-      console.log(plasmanaktif)
       function chartPlasmanDetay(){
         konsantrasyon = new Chart(ctxriskKonsantrasyonu, {
       type: 'bar',
@@ -865,6 +899,7 @@
 
 
       }
+      
       Chart.defaults.backgroundColor = '#4c4c4c  ';
       Chart.defaults.borderColor = '#4c4c4c  ';
       Chart.defaults.color = '#fff';
