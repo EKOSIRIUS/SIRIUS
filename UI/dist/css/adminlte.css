@@ -15323,6 +15323,14 @@ body.text-sm .control-sidebar {
   }
 }
 
+
+@media (max-width: 750.98px) {
+  .users-list > li {
+    width: 50% !important;
+    
+  }
+}
+
 .navbar-nav > .user-menu > .nav-link::after {
   content: none;
 }

@@ -52,3 +52,9 @@
     color: $gray-500;
   }
 }
+@media (max-width: 750.98px) {
+  .users-list > li {
+    width: 50%;
+    
+  }
+}
