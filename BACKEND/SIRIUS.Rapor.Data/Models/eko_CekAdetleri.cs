@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SIRIUS.Rapor.Data.Models
 {
-    public class eko_PazarlamaPlasman
+    public class eko_CekAdetleri
     {
-        public string Aciklama { get; set; }
-        public string Adi { get; set; }
-        public decimal Plasman { get; set; }
+        public string adi { get; set; }
+        public string girenkullanici { get; set; }
+        public int girilencek { get; set; }
     }
 }

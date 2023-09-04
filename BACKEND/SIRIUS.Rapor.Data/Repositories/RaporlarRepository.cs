@@ -14,8 +14,8 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_PazarlamaPerformansRaporu>();
         }
+
         public List<sel_eko_plasmandetay> sel_eko_plasmandetay(int yil,int secim)
         {
             using (var context = new dbfactoringContext())
@@ -23,9 +23,8 @@ namespace SIRIUS.Rapor.Data.Repositories
                 var data = context.sel_Eko_Plasmandetay.FromSqlRaw($"sel_eko_PlasmanDetay {yil} , {secim}").ToList();
                 return data;
             }
-
-            return new List<sel_eko_plasmandetay>();
         }
+
         public List<eko_IslemAdedi> islemAdedi()
         {
             using (var context = new dbfactoringContext())
@@ -34,7 +33,6 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_IslemAdedi>();
         }
 
         public List<eko_IslemOnayDurumTutari> OnayDurumuTutari()
@@ -45,7 +43,6 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_IslemOnayDurumTutari>();
         }
 
         public List<eko_ToplamBordroTutari> ToplamBordroTutari()
@@ -56,42 +53,29 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_ToplamBordroTutari>();
         }
 
         public List<eko_SonIslemler> SonIslemler()
         {
             using (var context = new dbfactoringContext())
             {
-                var data = context.eko_SonIslemler.FromSqlRaw($"select top 10 islemno , firmano, firmaadi, bordrotutar,bipekkod4 from islemtakip order by id desc").ToList();
+                var data = context.eko_SonIslemler.FromSqlRaw($"select top 10 islemno , firmano, firmaadi,kul.adi, bordrotutar,bipekkod4 from islemtakip it left join(select trim(bc.bipaciklama) aciklama,k.adi adi,k.id id from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü') kul on kul.aciklama = it.temsilcilik order by it.id desc").ToList();
                 return data;
             }
-
-            return new List<eko_SonIslemler>();
+            
         }
 
-        public List<eko_PazarlamaPlasman> PazarlamaPlasman()
+
+        public List<eko_PazarlamaciBilgileri> PazarlamaciBilgileri()
         {
             using (var context = new dbfactoringContext())
             {
-                var data = context.eko_PazarlamaPlasman.FromSqlRaw($"\t select trim(deneme.aciklama) aciklama,k.adi, sum(convert(numeric(20,2),deneme.bakiye)) plasman from (\r\n\tselect  tablo.aciklama,tablo.kullaniciid, bakiye from  eko_PazarlamaPerformansDetay ep \r\n\tleft join (\r\n\tselect firmano,aciklama,kullaniciid from firmadetay fd \r\n\tleft join(\r\n\t\tselect bc.bipaciklama aciklama,k.adi adi,k.id id from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü'\r\n\t\t) kullaniciTablo\r\n\t\ton kullaniciTablo.id = fd.kullaniciid\r\n\t)tablo\r\n\ton tablo.firmano = ep.firmaNo\r\n\twhere year(ep.tarih) = year(GETDATE()) and MONTH(ep.tarih) = month(GETDATE())  ) deneme  inner join kullanici k on deneme.kullaniciid=k.id  where deneme.aciklama is not null group by deneme.aciklama,k.adi\r\n").ToList();
+                var data = context.eko_PazarlamaciBilgileri.FromSqlRaw($"  select Trim(bc.bipaciklama) aciklama,k.adi adi,k.departman,sum(mb.risk) plasman, isnull(islemh.IslemHacmi,0) islemhacmi from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 \r\n left join (select temsilci,risk from MusteriBilgileri) mb on mb.temsilci= k.id\r\n left join (select u.departman , sum(isnull(Tutar, 0)) IslemHacmi from eko_aysonuislemhacimleri i (nolock)  inner join firmadetay fd (nolock) on i.Firmano = fd.firmano   inner join kullanici u (nolock) on fd.temsilci = u.id   inner join bipcodeparameters b (nolock) on b.bipturu = 'DEPRT' and u.departman = b.bipkod  group by u.departman ) islemh on islemh.departman = k.departman\r\n where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü'   group by bc.bipaciklama,k.adi,k.departman,islemh.IslemHacmi ").ToList();
                 return data;
             }
 
-            return new List<eko_PazarlamaPlasman>();
         }
-
-        public List<eko_PazarlamaciIslemHacimleri> PazarlamaciIslemHacimleri()
-        {
-            using (var context = new dbfactoringContext())
-            {
-                var data = context.eko_PazarlamaciIslemHacimleri.FromSqlRaw($" Select trim(tablo.aciklama) aciklama,tablo.adi, u.departman, sum(isnull(Tutar, 0)) IslemHacmi \r\n from eko_aysonuislemhacimleri i (nolock)  \r\n inner join firmadetay fd (nolock) on i.Firmano = fd.firmano  \r\n inner join kullanici u (nolock) on fd.temsilci = u.id  \r\n inner join bipcodeparameters b (nolock) on b.bipturu = 'DEPRT' and u.departman = b.bipkod  \r\n left join (\r\n select bc.bipaciklama aciklama,k.adi adi,k.id id,k.departman from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü'\r\n )tablo on tablo.departman=u.departman\r\n where i.ReportYear = year(GETDATE()) and i.ReportMonth = MONTH(GETDATE()) group by u.departman   ,tablo.aciklama,tablo.adi ").ToList();
-                return data;
-            }
-
-            return new List<eko_PazarlamaciIslemHacimleri>();
-        }
-
+        
         public List<eko_YeniMusteri> YeniMusteri()
         {
             using (var context = new dbfactoringContext())
@@ -100,8 +84,8 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_YeniMusteri>();
         }
+
         public List<eko_Ziyaret> Ziyaret()
         {
             using (var context = new dbfactoringContext())
@@ -110,9 +94,7 @@ namespace SIRIUS.Rapor.Data.Repositories
                 return data;
             }
 
-            return new List<eko_Ziyaret>();
         }
-
 
         public List<eko_HedefData> HedefData()
         {
@@ -121,10 +103,34 @@ namespace SIRIUS.Rapor.Data.Repositories
                 var data = context.eko_HedefData.FromSqlRaw($"select * from eko_HedefT").ToList();
                 return data;
             }
-
-            return new List<eko_HedefData>();
         }
 
+        public List<eko_CekAdetleri> CekAdetleri()
+        {
+            using (var context = new dbfactoringContext())
+            {
+                var data = context.eko_CekAdetleri.FromSqlRaw($"select k.adi,e.girenkullanici,COUNT(*) as girilencek from pesiniskontolar p left join eko_islemmaster e on p.islemno = e.islemno left join kullanici k on k.kullanicikodu = e.girenkullanici where year(islemtarihi) = year(GETDATE()) and MONTH(islemtarihi) = MONTH(GETDATE()) and day(islemtarihi) = 8 group by e.girenkullanici,k.adi ").ToList();
+                return data;
+            }
+        }
 
+        public bool HedefDataGuncelleme(eko_HedefDataUpdateModel model)
+        {
+            using (var context = new dbsiriusContext())
+            {
+                var result = context.eko_HedefData.FirstOrDefault(x=>x.id==model.id);
+                if (result == null)
+                {
+                    return false;
+                }
+
+                result.hedef = model.hedef;
+
+                context.eko_HedefData.Update(result);
+                context.SaveChanges();
+                return true;
+            }
+
+        }
     }
 }

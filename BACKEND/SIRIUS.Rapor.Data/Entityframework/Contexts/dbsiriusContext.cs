@@ -17,6 +17,7 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
 
         public DbSet<eko_HedefData> eko_HedefData { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=172.34.1.15;Initial Catalog=dbsirius;Persist Security Info=False;User ID=bisuser;Password=p@ssword1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
@@ -25,7 +26,7 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<eko_HedefData>().HasNoKey();
+            modelBuilder.Entity<eko_HedefData>().ToTable("eko_HedefT");
             base.OnModelCreating(modelBuilder);
         }
     }

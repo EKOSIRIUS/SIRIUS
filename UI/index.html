@@ -100,33 +100,12 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="pages/HedefGiris.html" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Dosya İşlemleri
-                <i class="fas fa-angle-left right"></i>
+                Hedef İşlemleri
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosyaları Görüntüle</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosya Ekle</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosya Sil</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
@@ -362,9 +341,9 @@
             musteri.push(element.plasmanMusteriAdedi);
             yeniIslemMusteriTutari.push(element.yeniIslemMusteriTutari);
             yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi); 
-            gelirKar.push(element.Gelir)
+            gelirKar.push(element.gelir)
           });
-          console.log(aylikortalamasatis);
+          console.log(gelirKar);
           chartTanımla();
     });
 

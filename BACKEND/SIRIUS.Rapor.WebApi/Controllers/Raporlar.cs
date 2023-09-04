@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SIRIUS.Rapor.Data.Models;
 using SIRIUS.Rapor.Data.Repositories;
 
 namespace SIRIUS.Rapor.WebApi.Controllers
@@ -10,7 +11,6 @@ namespace SIRIUS.Rapor.WebApi.Controllers
     public class Raporlar : ControllerBase
     {
         [HttpGet]
-    
         public IActionResult PazarlamaPerformans(int yil)
         {
             RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
@@ -93,26 +93,12 @@ namespace SIRIUS.Rapor.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public IActionResult PazarlamaPlasman()
-        {
-            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
-            var result = pazarlamaPerformansRepository.PazarlamaPlasman();
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
-        }
-
 
         [HttpGet]
-        public IActionResult PazarlamaciIslemHacimleri()
+        public IActionResult PazarlamaciBilgileri()
         {
             RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
-            var result = pazarlamaPerformansRepository.PazarlamaciIslemHacimleri();
+            var result = pazarlamaPerformansRepository.PazarlamaciBilgileri();
 
             if (result == null)
             {
@@ -163,5 +149,34 @@ namespace SIRIUS.Rapor.WebApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult CekAdetleri()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.CekAdetleri();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult HedefDataGuncelleme(eko_HedefDataUpdateModel model)
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.HedefDataGuncelleme(model);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
+    
 }

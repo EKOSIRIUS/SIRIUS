@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace SIRIUS.Rapor.Data.Models
 {
-    public class eko_HedefData
+    public class eko_HedefDataUpdateModel
     {
-        [Key]
         public int id { get; set; }
-        public string? aciklama { get; set; }
         public decimal hedef { get; set; }
 
     }

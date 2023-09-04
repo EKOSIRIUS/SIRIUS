@@ -100,45 +100,21 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="HedefGiris.html" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Dosya İşlemleri
-                <i class="fas fa-angle-left right"></i>
+                Hedef İşlemleri
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosyaları Görüntüle</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosya Ekle</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dosya Sil</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
     </div>
   </aside>
 
-  
-
-
 
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -154,17 +130,12 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Info boxes -->
-        
-        <!-- /.row -->
-
 
         <div class="row">
+
           <div class="col-md-6 ">
             <div class="card">
               <div class="card-header">
@@ -202,7 +173,6 @@
               </div>
               <!-- /.card-body -->
             </div>
-  
             <div class="card ">
               <div class="card-header">
                 <h3 class="card-title">Bordro Tutarları</h3>
@@ -229,7 +199,6 @@
               </div>
               <!-- /.card-body -->
             </div>
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Müşteri Ziyaret(Aylık)</h3>
@@ -249,6 +218,7 @@
               <!-- /.card-body -->
             </div>
           </div>
+
           <div class="col-md-6 ">
             <div class="card">
               <div class="card-header">
@@ -314,7 +284,6 @@
               </div>
               <!-- /.card-body -->
             </div>
-
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Hedef Tablosu</h5>
@@ -357,63 +326,13 @@
           
         </div>
 
-        
-        
-        <!-- PIE CHART -->
-        <!-- <div class="card card-danger">
-          <div class="card-header">
-            <h3 class="card-title">Pie Chart</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <canvas id="KullaniciCekAdet" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-          </div>
-          
-        </div> -->
-        <!-- /.card -->
-
-        <div >
-          <!-- USERS LIST -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Pazarlamacı Plasmanları</h3>
-
-              <div class="card-tools">
-                
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0" >
-              <ul class="users-list clearfix" id="pazarlamaciListe">
-                
-              </ul>
-              <!-- /.users-list -->
-            </div>
-            <!-- /.card-body -->
-            <!-- /.card-footer -->
-          </div>
-          <!--/.card -->
-        </div>
-        <!-- /.row -->
-
         <div class="row">
           <!-- Left col -->
           <div class="col-md-12">
 
             <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title">Pazarlamacı İşlem Hacimleri(Aylık)</h3>
+                <h3 class="card-title">Pazarlamacı Bilgileri</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -427,12 +346,13 @@
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <div class="table-responsive">
-                  <table class="table m-0"  id="pazarlamaciIslemHacimleri">
+                  <table class="table m-0"  id="pazarlamaciBilgileri">
                     <thead>
                     <tr>
                       <th>Şube</th>
                       <th>Adi Soyadı</th>
-                      <th>İşlem Hacmi</th>
+                      <th>Plasman</th>
+                      <!-- <th>İşlem Hacmi</th> -->
                     </tr>
                     </thead>
                     <tbody>
@@ -453,7 +373,6 @@
           <!-- /.col -->
         </div>
 
-        <!-- Main row -->
         <div class="row">
           <!-- Left col -->
           <div class="col-md-12">
@@ -480,6 +399,7 @@
                       <th>İslem No</th>
                       <th>Firma No</th>
                       <th>Firma Adi</th>
+                      <th>Temsilci</th>
                       <th>Bordro Tutar</th>
                       <th>Durum</th>
                     </tr>
@@ -501,10 +421,10 @@
           
           <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div><!--/. container-fluid -->
+
+      </div>
     </section>
-    <!-- /.content -->
+
   </div>
 
   <!-- Main Footer -->
@@ -779,6 +699,7 @@
     let IslemNo = [];
     let FirmaNo = [];
     let FirmaAdi = [];
+    let TemsilciAdi = [];
     let BordroTutar = [];
     let Durum = [];
 
@@ -787,6 +708,7 @@
         IslemNo.push(element.islemno);
         FirmaNo.push(element.firmano);
         FirmaAdi.push(element.firmaadi);
+        TemsilciAdi.push(element.adi);
         BordroTutar.push(element.bordrotutar);
         Durum.push(element.bipekkod4);
           });
@@ -803,6 +725,7 @@
         "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
         "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +TemsilciAdi[index]+"</span></td>"+
         "<td><span style='font-size:14px; font-weight: bold;'>" +BordroTutar[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"+
         "<td><span style='font-size:14px;' class='badge badge-danger'>" +Durum[index]+"</span></td>";
         }
@@ -811,6 +734,7 @@
         "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
         "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +TemsilciAdi[index]+"</span></td>"+
         "<td><span style='font-size:14px; font-weight: bold;'>" +BordroTutar[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"+
         "<td><span style='font-size:14px;' class='badge badge-warning'>" +Durum[index]+"</span></td>";
         }
@@ -819,6 +743,7 @@
         "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
         "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +TemsilciAdi[index]+"</span></td>"+
         "<td><span style='font-size:14px; font-weight: bold;'>" +BordroTutar[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"+
         "<td><span style='font-size:14px;' class='badge badge-success'>" +Durum[index]+"</span></td>";
         }
@@ -827,6 +752,7 @@
         "<td><span style='font-size:14px;'>" + IslemNo[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +FirmaNo[index]+"</span></td>"+
         "<td><span style='font-size:14px;'>" +FirmaAdi[index]+"</span></td>"+
+        "<td><span style='font-size:14px;'>" +TemsilciAdi[index]+"</span></td>"+
         "<td><span style='font-size:14px; font-weight: bold;'>" +BordroTutar[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"+
         "<td><span style='font-size:14px;' class='badge badge-info'>" +Durum[index]+"</span></td>";
         }
@@ -834,57 +760,31 @@
     }
     }
 
-
-    let adi = [];
-    let sube = [];
-    let plasman = [];
-    const data5 = fetch(aktifUrl+'/api/Raporlar/PazarlamaPlasman').then(response => response.json()).then(function(datas){
-      datas.forEach(element => {
-        sube.push(element.aciklama);
-        plasman.push(element.plasman);
-        adi.push(element.adi);
-
-          });
-          pazarlamaciDoldur();
-    });
-
-    function pazarlamaciDoldur() {
-      var listeRef = document.getElementById('pazarlamaciListe');
-      for (let index = 0; index < sube.length; index++){
-        //insert Row
-        listeRef.innerHTML += 
-        "<li>" + 
-        "<span class='users-list-name' style='font-size:16px;' >"+ adi[index] +"</span>"+
-        "<span class='users-list-name' style='font-size:16px;' >"+ sube[index] +"</span>"+
-        "<span class='users-list-date' style='font-size:16px; font-weight: bold;'>"+  plasman[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString() +"</span>"+
-        "</li>";
-
-      }
-    }
-
-
     let pSube = [];
     let pAdi = [];
     let pDepartman = [];
+    let pPlasman= [];
     let pIslemHacmi = [];
-    const data6 = fetch(aktifUrl+'/api/Raporlar/PazarlamaciIslemHacimleri').then(response => response.json()).then(function(datas){
+    const data6 = fetch(aktifUrl+'/api/Raporlar/PazarlamaciBilgileri').then(response => response.json()).then(function(datas){
       datas.forEach(element => {
         pSube.push(element.aciklama);
         pAdi.push(element.adi);
         pDepartman.push(element.departman);
+        pPlasman.push(element.plasman);
         pIslemHacmi.push(element.islemHacmi);
           });
           pazarlamaciIslemHacmi();
     });
 
     function pazarlamaciIslemHacmi() {
-      var tableRef = document.getElementById('pazarlamaciIslemHacimleri').getElementsByTagName('tbody')[0];
+      var tableRef = document.getElementById('pazarlamaciBilgileri').getElementsByTagName('tbody')[0];
       for (let index = 0; index < pSube.length; index++){
         //insert Row
           tableRef.insertRow().innerHTML = 
         "<td><span style='font-size:14px;'>" + pSube[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +pAdi[index]+"</span></td>"+
-        "<td><span style='font-size:14px; font-weight: bold;'>" +pIslemHacmi[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>";
+        "<td><span style='font-size:14px; font-weight: bold;'>" +pPlasman[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"
+        // +"<td><span style='font-size:14px; font-weight: bold;'>" +pIslemHacmi[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>";
         
 
     }

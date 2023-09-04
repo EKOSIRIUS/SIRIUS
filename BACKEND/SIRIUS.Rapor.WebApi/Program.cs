@@ -58,11 +58,11 @@ namespace SIRIUS.Rapor.WebApi
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.Cookie.Domain = "https://sirius.ekofactoring.com";
+                    options.Cookie.Domain = "http://127.0.0.1:5500/UI";
                     options.Cookie.Name = "EKO_WEB_Cookie";
                     options.Cookie.SameSite = SameSiteMode.None;
-                    options.LoginPath = "index";
-                    options.LogoutPath = "index";
+                    options.LoginPath = "/index.html";
+                    options.LogoutPath = "/index.html";
                 });
 
             builder.Services.ConfigureApplicationCookie(options =>
