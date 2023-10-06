@@ -27,6 +27,8 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
         public DbSet<eko_YeniMusteri> eko_YeniMusteri { get; set; }
         public DbSet<eko_Ziyaret> eko_Ziyaret { get; set; }
         public DbSet<eko_CekAdetleri> eko_CekAdetleri { get; set; }
+        public DbSet<eko_MusteriRiskListesi> eko_MusteriRiskListesi { get; set; }
+        public DbSet<eko_MusteriRiskListesiMap> eko_MusteriRiskListesiMap { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=172.34.1.15;Initial Catalog=dbfactoringtest;Persist Security Info=False;User ID=bisuser;Password=p@ssword1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
@@ -44,6 +46,8 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
             modelBuilder.Entity<eko_YeniMusteri>().HasNoKey();
             modelBuilder.Entity<eko_Ziyaret>().HasNoKey();
             modelBuilder.Entity<eko_CekAdetleri>().HasNoKey();
+            modelBuilder.Entity<eko_MusteriRiskListesi>().HasNoKey();
+            modelBuilder.Entity<eko_MusteriRiskListesiMap>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }

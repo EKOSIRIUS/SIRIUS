@@ -164,6 +164,34 @@ namespace SIRIUS.Rapor.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public IActionResult MusteriRiskListesi()
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.MusteriRiskListesi();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult MusteriRiskListesiMap(string user)
+        {
+            RaporlarRepository pazarlamaPerformansRepository = new RaporlarRepository();
+            var result = pazarlamaPerformansRepository.MusteriRiskListesiMap(user);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public IActionResult HedefDataGuncelleme(eko_HedefDataUpdateModel model)
         {

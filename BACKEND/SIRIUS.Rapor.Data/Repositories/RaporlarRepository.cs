@@ -65,12 +65,11 @@ namespace SIRIUS.Rapor.Data.Repositories
             
         }
 
-
         public List<eko_PazarlamaciBilgileri> PazarlamaciBilgileri()
         {
             using (var context = new dbfactoringContext())
             {
-                var data = context.eko_PazarlamaciBilgileri.FromSqlRaw($"  select Trim(bc.bipaciklama) aciklama,k.adi adi,k.departman,sum(mb.risk) plasman, isnull(islemh.IslemHacmi,0) islemhacmi from bipcodeparameters bc inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1 \r\n left join (select temsilci,risk from MusteriBilgileri) mb on mb.temsilci= k.id\r\n left join (select u.departman , sum(isnull(Tutar, 0)) IslemHacmi from eko_aysonuislemhacimleri i (nolock)  inner join firmadetay fd (nolock) on i.Firmano = fd.firmano   inner join kullanici u (nolock) on fd.temsilci = u.id   inner join bipcodeparameters b (nolock) on b.bipturu = 'DEPRT' and u.departman = b.bipkod  group by u.departman ) islemh on islemh.departman = k.departman\r\n where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü'   group by bc.bipaciklama,k.adi,k.departman,islemh.IslemHacmi ").ToList();
+                var data = context.eko_PazarlamaciBilgileri.FromSqlRaw($"select Trim(bc.bipaciklama) aciklama,k.adi adi,k.departman,sum(mb.risk) plasman, isnull(islemh.IslemHacmi,0) islemhacmi from bipcodeparameters bc \r\n inner join  kullanici k on bc.bipekkod3 = k.id and k.aktif =1  \r\n left join (select temsilci,risk from MusteriBilgileri) mb on mb.temsilci= k.id \r\n left join (select u.departman , sum(isnull(Tutar, 0)) IslemHacmi from eko_aysonuislemhacimleri i (nolock)  \r\n inner join firmadetay fd (nolock) on i.Firmano = fd.firmano   \r\n inner join kullanici u (nolock) on fd.temsilci = u.id   \r\n inner join bipcodeparameters b (nolock) on b.bipturu = 'DEPRT' and u.departman = b.bipkod \r\n where year(tarih) = year(GETDATE()) and MONTH(tarih) =month(GETDATE())\r\n group by u.departman ) islemh on islemh.departman = k.departman \r\n where bipturu = 'DEPRT' and bc.bipaciklama <> 'İst-Beylikdüzü' and mb.risk <> 0    \r\n group by bc.bipaciklama,k.adi,k.departman,islemh.IslemHacmi \r\n ").ToList();
                 return data;
             }
 
@@ -111,6 +110,34 @@ namespace SIRIUS.Rapor.Data.Repositories
             {
                 var data = context.eko_CekAdetleri.FromSqlRaw($"select k.adi,e.girenkullanici,COUNT(*) as girilencek from pesiniskontolar p left join eko_islemmaster e on p.islemno = e.islemno left join kullanici k on k.kullanicikodu = e.girenkullanici where year(islemtarihi) = year(GETDATE()) and MONTH(islemtarihi) = MONTH(GETDATE()) and day(islemtarihi) = 8 group by e.girenkullanici,k.adi ").ToList();
                 return data;
+            }
+        }
+
+        public List<eko_MusteriRiskListesi> MusteriRiskListesi()
+        {
+            using (var context = new dbfactoringContext())
+            {
+                var data = context.eko_MusteriRiskListesi.FromSqlRaw($"select distinct f.firmano, f.adi musterit,fd.vergino,k.adi,riskB.bakiyesi, a.sehir, a.semt,a.adres from firma f \r\nleft join (select firmano ,max(sehir) sehir,max(semt) semt,max(adres) adres from adres where sehir is not null and semt is not null and adres is not null group by firmano) a on f.firmano = a.firmano  \r\nleft join firmadetay fd on fd.firmano=f.firmano \r\nleft join kullanici k on k.id=fd.temsilci\r\nright join  (select tarih , firmano , sum(cast( bakiye AS DECIMAL(18,2))) bakiyesi from eko_PazarlamaPerformansDetay where tarih =DateAdd(day,-1,convert(varchar, getdate(), 1)) group by firmano, tarih )riskB on riskB.firmano=f.firmano\r\nwhere k.aktif=1 ").ToList();
+                return data;
+            }
+        }
+
+        public List<eko_MusteriRiskListesiMap> MusteriRiskListesiMap(string user = "Hepsi")
+        {
+            using (var context = new dbfactoringContext())
+            {
+
+                if(user == "Hepsi")
+                {
+                    var data = context.eko_MusteriRiskListesiMap.FromSqlRaw($"WITH a as (select distinct f.firmano, f.adi,fd.vergino,k.adi musterit,riskB.bakiyesi, a.sehir, a.semt,a.adres from firma f \r\nleft join (select firmano ,max(sehir) sehir,max(semt) semt,max(adres) adres from adres where sehir is not null and semt is not null and adres is not null group by firmano) a on f.firmano = a.firmano  \r\nleft join firmadetay fd on fd.firmano=f.firmano \r\nleft join kullanici k on k.id=fd.temsilci\r\nright join  (select tarih , firmano , sum(cast( bakiye AS DECIMAL(18,2))) bakiyesi from eko_PazarlamaPerformansDetay where tarih =DateAdd(day,-1,convert(varchar, getdate(), 1)) group by firmano, tarih )riskB on riskB.firmano=f.firmano\r\nwhere k.aktif=1) select sehir,semt,count(firmano) adet from a group by sehir,semt").ToList();
+                    return data;
+                }
+                else if (user != "Hepsi")
+                {
+                    var data = context.eko_MusteriRiskListesiMap.FromSqlRaw($"WITH a as (select distinct f.firmano, f.adi,fd.vergino,k.adi musterit,riskB.bakiyesi, a.sehir, a.semt,a.adres from firma f \r\nleft join (select firmano ,max(sehir) sehir,max(semt) semt,max(adres) adres from adres where sehir is not null and semt is not null and adres is not null group by firmano) a on f.firmano = a.firmano  \r\nleft join firmadetay fd on fd.firmano=f.firmano \r\nleft join kullanici k on k.id=fd.temsilci\r\nright join  (select tarih , firmano , sum(cast( bakiye AS DECIMAL(18,2))) bakiyesi from eko_PazarlamaPerformansDetay where tarih =DateAdd(day,-1,convert(varchar, getdate(), 1)) group by firmano, tarih )riskB on riskB.firmano=f.firmano\r\nwhere k.aktif=1) select sehir,semt,count(firmano) adet from a where musteriT='{user}' group by sehir,semt ").ToList();
+                    return data;
+                }
+                return null;
             }
         }
 

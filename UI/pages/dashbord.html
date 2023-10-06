@@ -107,6 +107,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="data.html" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Müşteri Risk
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -352,7 +361,7 @@
                       <th>Şube</th>
                       <th>Adi Soyadı</th>
                       <th>Plasman</th>
-                      <!-- <th>İşlem Hacmi</th> -->
+                      <th>İşlem Hacmi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -422,8 +431,11 @@
           <!-- /.col -->
         </div>
 
+
       </div>
     </section>
+
+    
 
   </div>
 
@@ -784,7 +796,7 @@
         "<td><span style='font-size:14px;'>" + pSube[index]+"</span></td>" + 
         "<td><span style='font-size:14px;'>" +pAdi[index]+"</span></td>"+
         "<td><span style='font-size:14px; font-weight: bold;'>" +pPlasman[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>"
-        // +"<td><span style='font-size:14px; font-weight: bold;'>" +pIslemHacmi[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>";
+         +"<td><span style='font-size:14px; font-weight: bold;'>" +pIslemHacmi[index].toLocaleString(undefined,{ minimumFractionDigits: 2 }).toString()+"</span></td>";
         
 
     }

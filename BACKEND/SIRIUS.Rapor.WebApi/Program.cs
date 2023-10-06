@@ -33,10 +33,10 @@ namespace SIRIUS.Rapor.WebApi
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbsirius"));
             });
 
-            builder.Services.AddDbContext<dbfactoringContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("dbfactoring"));
-            });
+            //builder.Services.AddDbContext<dbfactoringContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("dbfactoring"));
+            //});
 
             builder.Services.AddIdentity<EkoUser,EkoRole>(options =>
             {
@@ -58,11 +58,11 @@ namespace SIRIUS.Rapor.WebApi
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
                 {
-                    options.Cookie.Domain = "http://127.0.0.1:5500/UI";
+                    options.Cookie.Domain = "h   ttp://127.0.0.1:5500/UI";
                     options.Cookie.Name = "EKO_WEB_Cookie";
                     options.Cookie.SameSite = SameSiteMode.None;
-                    options.LoginPath = "/index.html";
-                    options.LogoutPath = "/index.html";
+                    options.LoginPath = "/login.html";
+                    options.LogoutPath = "/login.html";
                 });
 
             builder.Services.ConfigureApplicationCookie(options =>

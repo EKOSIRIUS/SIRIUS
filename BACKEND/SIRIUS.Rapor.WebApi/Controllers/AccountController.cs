@@ -50,7 +50,7 @@ namespace SIRIUS.Rapor.WebApi.Controllers
                 var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var authenticationProperty = new AuthenticationProperties
                 {
-                    RedirectUri = @"/index.html"
+                    RedirectUri = @"/login.html"
                 };
                 foreach (var role in roles)
                 {

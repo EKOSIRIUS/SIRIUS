@@ -41,13 +41,12 @@
             </div>
           </div>
         </div>
+        
+        
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Beni Hatırla
-              </label>
+              
             </div>
           </div>
           <!-- /.col -->
@@ -56,6 +55,7 @@
           </div>
           <!-- /.col -->
         </div>
+        
       </form>
 
       <!-- /.social-auth-links -->
@@ -63,6 +63,14 @@
       <p class="mb-1">
         <a href="forgot-password.html">Şifremi Unuttum</a>
       </p>
+
+      <div class="row">
+        <div class="col-8">
+          <label id="hata">
+              
+          </label>
+        </div>
+      </div>
 
     </div>
     <!-- /.login-card-body -->
@@ -87,7 +95,7 @@ const depUrl = 'https://siriusapi.ekofactoring.com';
 function girisYap() {
   var email=document.getElementById("email");
   var sifre=document.getElementById("sifre");
-  var data = {email:email.value,password:sifre.value,rememberMe:true};
+  var data = {email:email.value,password:sifre.value,rememberMe:false};
   $.ajax({
         type: "POST",
         url: aktifUrl+'/api/Account/Login',
@@ -95,7 +103,12 @@ function girisYap() {
         contentType: "application/json",
         success:(data,status,xhr) => {
             console.log(data,status,xhr);
-
+            if(status == "succes"){
+              var link = window.location.href.split('/');
+            link[link.length-1] = "index.html";
+            window.location.href = link.toString().replace(/,/g,'/')
+            }
+            document.getElementById("hata").innerHTML = status
             // var link = window.location.href.split('/');
             // link[link.length-1] = "index.html";
             // window.location.href = link.toString().replace(/,/g,'/')
