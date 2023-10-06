@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SIRIUS.Rapor.Data.Models;
 using SIRIUS.Rapor.WebApi.Models;
 using SIRIUS.Rapor.WebApi.Services;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Data;
+using System.Security.Claims;
 
 namespace SIRIUS.Rapor.WebApi.Controllers
 {
@@ -39,6 +43,22 @@ namespace SIRIUS.Rapor.WebApi.Controllers
 
             if (result.Succeeded)
             {
+                var roles =  await _userManager.GetRolesAsync(hasUser);
+                var claims = new List<Claim>();
+
+                claims.Add(new Claim(ClaimTypes.Email, hasUser.Email));
+                var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authenticationProperty = new AuthenticationProperties
+                {
+                    RedirectUri = @"/login.html"
+                };
+                foreach (var role in roles)
+                {
+                    new Claim(ClaimTypes.Role, role);
+                }
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme
+                                              , new ClaimsPrincipal(claimIdentity)
+                                              , authenticationProperty);
                 return Ok(hasUser);
             }
 
@@ -72,7 +92,6 @@ namespace SIRIUS.Rapor.WebApi.Controllers
             var identityResult = await _userManager.CreateAsync(new()
             {
                 UserName = request.UserName,
-                PhoneNumber = request.Phone,
                 Email = request.Email
             },request.Password);
 

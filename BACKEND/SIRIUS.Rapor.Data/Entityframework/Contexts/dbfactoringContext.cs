@@ -23,10 +23,12 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
         public DbSet<eko_IslemOnayDurumTutari> eko_IslemOnayDurumTutari { get; set; }
         public DbSet<eko_ToplamBordroTutari> eko_ToplamBordroTutari { get; set; }
         public DbSet<eko_SonIslemler> eko_SonIslemler { get; set; }
-        public DbSet<eko_PazarlamaPlasman> eko_PazarlamaPlasman { get; set; }
-        public DbSet<eko_PazarlamaciIslemHacimleri> eko_PazarlamaciIslemHacimleri { get; set; }
+        public DbSet<eko_PazarlamaciBilgileri> eko_PazarlamaciBilgileri { get; set; }
         public DbSet<eko_YeniMusteri> eko_YeniMusteri { get; set; }
         public DbSet<eko_Ziyaret> eko_Ziyaret { get; set; }
+        public DbSet<eko_CekAdetleri> eko_CekAdetleri { get; set; }
+        public DbSet<eko_MusteriRiskListesi> eko_MusteriRiskListesi { get; set; }
+        public DbSet<eko_MusteriRiskListesiMap> eko_MusteriRiskListesiMap { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=172.34.1.15;Initial Catalog=dbfactoringtest;Persist Security Info=False;User ID=bisuser;Password=p@ssword1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
@@ -40,10 +42,12 @@ namespace SIRIUS.Rapor.Data.Entityframework.Contexts
             modelBuilder.Entity<eko_IslemOnayDurumTutari>().HasNoKey();
             modelBuilder.Entity<eko_ToplamBordroTutari>().HasNoKey();
             modelBuilder.Entity<eko_SonIslemler>().HasNoKey();
-            modelBuilder.Entity<eko_PazarlamaPlasman>().HasNoKey();
-            modelBuilder.Entity<eko_PazarlamaciIslemHacimleri>().HasNoKey();
+            modelBuilder.Entity<eko_PazarlamaciBilgileri>().HasNoKey();
             modelBuilder.Entity<eko_YeniMusteri>().HasNoKey();
             modelBuilder.Entity<eko_Ziyaret>().HasNoKey();
+            modelBuilder.Entity<eko_CekAdetleri>().HasNoKey();
+            modelBuilder.Entity<eko_MusteriRiskListesi>().HasNoKey();
+            modelBuilder.Entity<eko_MusteriRiskListesiMap>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }

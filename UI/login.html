@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giriş Yap</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>EKOFACTORING</b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+
+
+      <form  >
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="email" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" id="sifre" class="form-control" placeholder="Şifre">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <a  onclick="girisYap()" class="btn btn-primary btn-block">Giriş Yap</a>
+          </div>
+          <!-- /.col -->
+        </div>
+        
+      </form>
+
+      <!-- /.social-auth-links -->
+
+      <p class="mb-1">
+        <a href="forgot-password.html">Şifremi Unuttum</a>
+      </p>
+
+      <div class="row">
+        <div class="col-8">
+          <label id="hata">
+              
+          </label>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<script>
+
+const depUrl = 'https://siriusapi.ekofactoring.com';
+    const testUrl = 'https://localhost:7105';
+
+
+    const aktifUrl = testUrl;
+
+function girisYap() {
+  var email=document.getElementById("email");
+  var sifre=document.getElementById("sifre");
+  var data = {email:email.value,password:sifre.value,rememberMe:false};
+  $.ajax({
+        type: "POST",
+        url: aktifUrl+'/api/Account/Login',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success:(data,status,xhr) => {
+            console.log(data,status,xhr);
+            if(status == "succes"){
+              var link = window.location.href.split('/');
+            link[link.length-1] = "index.html";
+            window.location.href = link.toString().replace(/,/g,'/')
+            }
+            document.getElementById("hata").innerHTML = status
+            // var link = window.location.href.split('/');
+            // link[link.length-1] = "index.html";
+            // window.location.href = link.toString().replace(/,/g,'/')
+          },
+        error:(message)=>{
+          console.log(message);
+        }
+      })
+
+}
+
+</script>
+
+</body>
+</html>
