@@ -304,6 +304,12 @@
     const testUrl = 'https://localhost:7105';
 
     const aktifUrl = testUrl;
+    const token = sessionStorage.getItem('accessToken');
+    if(token == null){
+    var link = window.location.href.split('/');
+    link[link.length-1] =  "../login.html";
+    window.location.href = link.toString().replace(/,/g,'/')
+  }
 
     const defaultBackGroundColor = 'rgba(231,125,38,0.8)';
     const defaultBorderColor = 'rgba(0,0,0,0.8)';
@@ -341,7 +347,13 @@
     let bool6 = false;
 
    
-    const data = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil=2023').then(response => response.json()).then(function(datas){
+    const data = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil=2023',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             islemhacimleri.push(element.islemHacmi);
             aylikortalamasatis.push(element.islemKatkiliOran)
@@ -352,47 +364,82 @@
             yeniMusteriAdedi.push(element.yeniIslemMusteriAdedi); 
             gelirKar.push(element.gelir)
           });
-          console.log(gelirKar);
           chartTanımla();
     });
 
 
-    const data1 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=1').then(response => response.json()).then(function(datas){
+    const data1 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=1',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             toplam.push(element.risk);
           });
           bool1=true;
           kontrol()
     });
-    const data2 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=2').then(response => response.json()).then(function(datas){
+    const data2 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=2',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             ankara.push(element.risk);
           });
           bool2=true;
           kontrol()
     });
-    const data3 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=3').then(response => response.json()).then(function(datas){
+    const data3 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=3',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             konya.push(element.risk);
           });
           bool3=true;
           kontrol()
     });
-    const data4 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=4').then(response => response.json()).then(function(datas){
+    const data4 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=4',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             trakya.push(element.risk);
           });
           bool4=true;
           kontrol()
     });
-    const data5 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=5').then(response => response.json()).then(function(datas){
+    const data5 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=5',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             kobi.push(element.risk);
           });
           bool5=true;
           kontrol()
     });
-    const data6 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=6').then(response => response.json()).then(function(datas){
+    const data6 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil=2023&secim=6',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             ticari.push(element.risk);
           });
@@ -732,7 +779,13 @@
         ticari=[]
         
         
-        const data = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil='+yil).then(response => response.json()).then(function(datas){
+        const data = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil='+yil,{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
         datas.forEach(element => {
               islemhacimleri.push(element.islemHacmi);
               plasman.push(element.plasman);
@@ -747,42 +800,78 @@
 
 
 
-        const data1 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=1').then(response => response.json()).then(function(datas){
+        const data1 =  fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=1',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 toplam.push(element.risk);
               });
               bool1=true;
           kontrol()
         });
-        const data2 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=2').then(response => response.json()).then(function(datas){
+        const data2 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=2',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 ankara.push(element.risk);
               });
               bool2=true;
           kontrol()
         });
-        const data3 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=3').then(response => response.json()).then(function(datas){
+        const data3 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=3',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 konya.push(element.risk);
               });
               bool3=true;
           kontrol()
         });
-        const data4 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=4').then(response => response.json()).then(function(datas){
+        const data4 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=4',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 trakya.push(element.risk);
               });
               bool4=true;
           kontrol()
         });
-        const data5 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=5').then(response => response.json()).then(function(datas){
+        const data5 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=5',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 kobi.push(element.risk);
               });
               bool5=true;
           kontrol()
         });
-        const data6 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=6').then(response => response.json()).then(function(datas){
+        const data6 = fetch(aktifUrl+'/api/Raporlar/PlasmanDetay?yil='+yil+'&secim=6',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
           datas.forEach(element => {
                 ticari.push(element.risk);
               });

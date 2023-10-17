@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
+    <ProjectReference Include="..\SIRIUS.Rapor.Business\SIRIUS.Rapor.Business.csproj" />
     <ProjectReference Include="..\SIRIUS.Rapor.Data\SIRIUS.Rapor.Data.csproj" />
   </ItemGroup>
 

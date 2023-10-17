@@ -266,9 +266,21 @@
 
 
     const aktifUrl = testUrl;
+    const token = sessionStorage.getItem('accessToken');
+    if(token == null){
+    var link = window.location.href.split('/');
+    link[link.length-1] =  "../login.html";
+    window.location.href = link.toString().replace(/,/g,'/')
+  }
 
     let hedefDegerler = []
-    const data1 = fetch(aktifUrl+'/api/Raporlar/HedefData').then(response => response.json()).then(function(datas){
+    const data1 = fetch(aktifUrl+'/api/Raporlar/HedefData',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
         datas.forEach(element => {
             hedefDegerler.push(element.hedef);
             });

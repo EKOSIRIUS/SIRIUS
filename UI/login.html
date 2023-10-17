@@ -86,36 +86,37 @@
 <script src="dist/js/adminlte.min.js"></script>
 <script>
 
-const depUrl = 'https://siriusapi.ekofactoring.com';
-    const testUrl = 'https://localhost:7105';
+const depUrl = 'https://auth.ekofactoring.com';
+    const testUrl = 'https://localhost:7277';
 
 
     const aktifUrl = testUrl;
 
 function girisYap() {
+  var veri; 
   var email=document.getElementById("email");
   var sifre=document.getElementById("sifre");
-  var data = {email:email.value,password:sifre.value,rememberMe:false};
+  var data = {email:email.value,password:sifre.value};
   $.ajax({
         type: "POST",
-        url: aktifUrl+'/api/Account/Login',
+        url: aktifUrl+'/api/Auth/CreateToken',
         data: JSON.stringify(data),
         contentType: "application/json",
         success:(data,status,xhr) => {
-            console.log(data,status,xhr);
-            if(status == "succes"){
+            if(data.statusCode == 200){
+              console.log(data);
+              sessionStorage.setItem('accessToken', data.data.accessToken);
               var link = window.location.href.split('/');
-            link[link.length-1] = "index.html";
-            window.location.href = link.toString().replace(/,/g,'/')
+              link[link.length-1] = "index.html";
+              window.location.href = link.toString().replace(/,/g,'/')
             }
-            document.getElementById("hata").innerHTML = status
-            // var link = window.location.href.split('/');
-            // link[link.length-1] = "index.html";
-            // window.location.href = link.toString().replace(/,/g,'/')
           },
-        error:(message)=>{
-          console.log(message);
-        }
+          error: (xhr, status, error) => {
+            document.getElementById("hata").innerHTML = 'Kullanıcı Adı Veya Şifre Hatalı'
+            console.log(xhr);    // XMLHttpRequest nesnesi
+            console.log(status); // HTTP durum kodu
+            console.log(error);  // Hata mesajı
+          }
       })
 
 }

@@ -471,6 +471,12 @@
     
 
     const aktifUrl = testUrl;
+    const token = sessionStorage.getItem('accessToken');
+    if(token == null){
+    var link = window.location.href.split('/');
+    link[link.length-1] =  "../login.html";
+    window.location.href = link.toString().replace(/,/g,'/')
+    }
 
 
     let ToplamBordroTutari = [];
@@ -511,7 +517,13 @@
       let hedefAciklama = [];
       let hedefDegerler = [];
 
-      const data1 = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil=2023').then(response => response.json()).then(function(datas){
+      const data1 = fetch(aktifUrl+'/api/Raporlar/PazarlamaPerformans?yil=2023',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             hedefPlasman.push(element.plasman);
             hedefGelir.push(element.gelir);
@@ -521,10 +533,17 @@
           HedefHeader()
           HedefFooter()
     });
-      const data9 = fetch(aktifUrl+'/api/Raporlar/HedefData').then(response => response.json()).then(function(datas){
+      const data9 = fetch(aktifUrl+'/api/Raporlar/HedefData',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
         datas.forEach(element => {
             hedefDegerler.push(element.hedef);
             });
+            console.log(hedefDegerler)
             
       });
 
@@ -626,7 +645,13 @@
 
     let ziyateAdi = []
     let ziyaretAdet = []
-    const data8 = fetch(aktifUrl+'/api/Raporlar/Ziyaret').then(response => response.json()).then(function(datas){
+    const data8 = fetch(aktifUrl+'/api/Raporlar/Ziyaret',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             ziyateAdi.push(element.adi);
             ziyaretAdet.push(element.ziyaret);
@@ -657,7 +682,13 @@
     }
 
     let yeniMusteriAdedi=[];
-    const data7 = fetch(aktifUrl+'/api/Raporlar/YeniMusteri').then(response => response.json()).then(function(datas){
+    const data7 = fetch(aktifUrl+'/api/Raporlar/YeniMusteri',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             yeniMusteriAdedi.push(element.adet);
 
@@ -672,7 +703,13 @@
           
     });
 
-    const data = fetch(aktifUrl+'/api/Raporlar/ToplamBordroTutari').then(response => response.json()).then(function(datas){
+    const data = fetch(aktifUrl+'/api/Raporlar/ToplamBordroTutari',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             ToplamBordroTutari.push(element.toplamBordroTutari);
           });
@@ -681,7 +718,13 @@
           toplamYillik.innerHTML =ToplamBordroTutari[2].toLocaleString(undefined,{ minimumFractionDigits:2 });
     });
 
-    const data2 = fetch(aktifUrl+'/api/Raporlar/IslemAdedi').then(response => response.json()).then(function(datas){
+    const data2 = fetch(aktifUrl+'/api/Raporlar/IslemAdedi',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             IslemAdedi.push(element.islemAdedi);
             IslemAdediGercelesen.push(element.gerceklesen);
@@ -695,7 +738,13 @@
           
     });
 
-    const data3 = fetch(aktifUrl+'/api/Raporlar/OnayDurumuTutari').then(response => response.json()).then(function(datas){
+    const data3 = fetch(aktifUrl+'/api/Raporlar/OnayDurumuTutari',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
         OnayDurum.push(element.islemBordroTutari);
           });
@@ -715,7 +764,13 @@
     let BordroTutar = [];
     let Durum = [];
 
-    const data4 = fetch(aktifUrl+'/api/Raporlar/SonIslemler').then(response => response.json()).then(function(datas){
+    const data4 = fetch(aktifUrl+'/api/Raporlar/SonIslemler',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
         IslemNo.push(element.islemno);
         FirmaNo.push(element.firmano);
@@ -777,7 +832,13 @@
     let pDepartman = [];
     let pPlasman= [];
     let pIslemHacmi = [];
-    const data6 = fetch(aktifUrl+'/api/Raporlar/PazarlamaciBilgileri').then(response => response.json()).then(function(datas){
+    const data6 = fetch(aktifUrl+'/api/Raporlar/PazarlamaciBilgileri',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
         pSube.push(element.aciklama);
         pAdi.push(element.adi);
@@ -789,7 +850,13 @@
     });
 
     function pazarlamaciIslemHacmi() {
-      var tableRef = document.getElementById('pazarlamaciBilgileri').getElementsByTagName('tbody')[0];
+      var tableRef = document.getElementById('pazarlamaciBilgileri',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).getElementsByTagName('tbody')[0];
       for (let index = 0; index < pSube.length; index++){
         //insert Row
           tableRef.insertRow().innerHTML = 

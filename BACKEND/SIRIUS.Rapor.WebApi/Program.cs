@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SIRIUS.Rapor.Data.Entityframework.Contexts;
-using SIRIUS.Rapor.Data.Models;
+using SharedLibrary.Configurations;
+using SIRIUS.Rapor.Business.Extensions;
+using SharedLibrary.Extensions;
 
 namespace SIRIUS.Rapor.WebApi
 {
@@ -11,86 +9,33 @@ namespace SIRIUS.Rapor.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
+            builder.Services.LoadMyService(builder.Environment.IsDevelopment(),builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddCors(options =>
             {
-                c.EnableAnnotations();
-                c.SwaggerDoc("v1",new Microsoft.OpenApi.Models.OpenApiInfo { Title = "EKO Api Dökümantasyon", Version = "v1" });
-            });
-
-            builder.Services.AddCors(service => {
-                service.AddPolicy("AllowOrigin", options => options
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                );
-            });
-
-            builder.Services.AddDbContext<dbsiriusContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("dbsirius"));
-            });
-
-            //builder.Services.AddDbContext<dbfactoringContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("dbfactoring"));
-            //});
-
-            builder.Services.AddIdentity<EkoUser,EkoRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                
-                //options.SignIn.RequireConfirmedEmail = true;
-                
-                options.Password.RequiredLength = 10;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireDigit = false;
-                
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 3;
-            }).AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<dbsiriusContext>();
-
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                options.AddPolicy("AllowSpecificOrigin", builder =>
                 {
-                    options.Cookie.Domain = "h   ttp://127.0.0.1:5500/UI";
-                    options.Cookie.Name = "EKO_WEB_Cookie";
-                    options.Cookie.SameSite = SameSiteMode.None;
-                    options.LoginPath = "/login.html";
-                    options.LogoutPath = "/login.html";
+                    builder.WithOrigins("http://127.0.0.1:5500")// Ýzin vermek istediðiniz kökeni burada belirtin
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
                 });
-
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                var cookieBuilder = new CookieBuilder();
-                cookieBuilder.Name = "EKO_API_Cookie";
-                options.LoginPath = "/api/account/login";
-                options.LogoutPath = "/api/account/logout";
-                options.Cookie = cookieBuilder;
-                options.ExpireTimeSpan = TimeSpan.FromDays(60);
-                options.SlidingExpiration = true;
             });
+
+            builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
+            var tokenOptions = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+            builder.Services.AddCustomTokenAuth(tokenOptions);
 
             var app = builder.Build();
-
-            //if (app.Environment.IsDevelopment())
-            //{
-              
-            //}
-
+            app.UseCors("AllowSpecificOrigin");
             app.UseSwagger();
             app.UseSwaggerUI();
-
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().WithMethods("POST", "OPTIONS", "GET"));
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapControllerRoute(name : "swagger",pattern: "{controller=swagger}/index.html");
             app.MapControllers();
             app.Run();
         }

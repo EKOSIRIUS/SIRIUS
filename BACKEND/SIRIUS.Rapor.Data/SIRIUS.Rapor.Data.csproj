@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SIRIUS.Rapor.Entity\SIRIUS.Rapor.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

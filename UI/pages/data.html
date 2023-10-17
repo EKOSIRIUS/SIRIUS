@@ -248,6 +248,12 @@
   const testUrl = 'https://localhost:7105';
 
   const aktifUrl = testUrl;
+  const token = sessionStorage.getItem('accessToken');
+  if(token == null){
+    var link = window.location.href.split('/');
+    link[link.length-1] =  "../login.html";
+    window.location.href = link.toString().replace(/,/g,'/')
+  }
 
   let firmano = [];
   let adi = [];
@@ -258,7 +264,13 @@
   let semt = [];
   let adres = [];
 
-  const data1 = fetch(aktifUrl+'/api/Raporlar/MusteriRiskListesi').then(response => response.json()).then(function(datas){
+  const data1 = fetch(aktifUrl+'/api/Raporlar/MusteriRiskListesi',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
             firmano.push(element.firmano);
             adi.push(element.adi);
@@ -300,7 +312,13 @@
     let mapsehir = [];
     let mapsemt = [];
     let mapadet = [];
-    const data2 = fetch(aktifUrl+'/api/Raporlar/MusteriRiskListesiMap?user=Hepsi').then(response => response.json()).then(function(datas){
+    const data2 = fetch(aktifUrl+'/api/Raporlar/MusteriRiskListesiMap?user=Hepsi',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json()).then(function(datas){
       datas.forEach(element => {
           mapsehir.push(element.sehir);
             mapsemt.push(element.semt);
