@@ -84,44 +84,8 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<script>
-
-const depUrl = 'https://auth.ekofactoring.com';
-    const testUrl = 'https://localhost:7277';
-
-
-    const aktifUrl = testUrl;
-
-function girisYap() {
-  var veri; 
-  var email=document.getElementById("email");
-  var sifre=document.getElementById("sifre");
-  var data = {email:email.value,password:sifre.value};
-  $.ajax({
-        type: "POST",
-        url: aktifUrl+'/api/Auth/CreateToken',
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success:(data,status,xhr) => {
-            if(data.statusCode == 200){
-              console.log(data);
-              sessionStorage.setItem('accessToken', data.data.accessToken);
-              var link = window.location.href.split('/');
-              link[link.length-1] = "index.html";
-              window.location.href = link.toString().replace(/,/g,'/')
-            }
-          },
-          error: (xhr, status, error) => {
-            document.getElementById("hata").innerHTML = 'Kullanıcı Adı Veya Şifre Hatalı'
-            console.log(xhr);    // XMLHttpRequest nesnesi
-            console.log(status); // HTTP durum kodu
-            console.log(error);  // Hata mesajı
-          }
-      })
-
-}
-
-</script>
+<script src="pages/js/fetch.js"></script>
+<script src="pages/js/login.js"></script>
 
 </body>
 </html>

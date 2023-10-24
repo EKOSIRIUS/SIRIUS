@@ -30,7 +30,7 @@ namespace AuthServerAPI
             {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
                 {
-                    builder.WithOrigins("http://127.0.0.1:5500") // Ýzin vermek istediðiniz kökeni burada belirtin
+                    builder.AllowAnyOrigin()
                            .AllowAnyHeader()
                            .AllowAnyMethod();
                 });
@@ -51,6 +51,7 @@ namespace AuthServerAPI
                 Opt.User.RequireUniqueEmail = true;
                 Opt.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
             builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
             builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));
             builder.Services.AddAuthentication(options =>
@@ -72,9 +73,6 @@ namespace AuthServerAPI
                     //ClockSkew=TimeSpan.Zero
                 };
             });
-
-            
-
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

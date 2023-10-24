@@ -11,35 +11,19 @@ namespace SIRIUS.Rapor.Business.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection LoadMyService(this IServiceCollection services,bool isDevelopment,IConfiguration confg)
+        public static IServiceCollection LoadMyService(this IServiceCollection services,IConfiguration confg)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRaporlarService, RaporlarService>();
-          
-            if (isDevelopment)
-            {
-                services.AddDbContext<dbfactoringContext>(options =>
-                {
-                    options.UseSqlServer(confg.GetConnectionString("test_dbfactoringtest"));
-                });
-
-                services.AddDbContext<dbsiriusContext>(options =>
-                {
-                    options.UseSqlServer(confg.GetConnectionString("test_dbsirius"));
-                });
-            }
-            else
-            {
-                services.AddDbContext<dbfactoringContext>(options =>
+            services
+                .AddDbContext<dbfactoringContext>(options =>
                 {
                     options.UseSqlServer(confg.GetConnectionString("dbfactoringtest"));
-                });
-
-                services.AddDbContext<dbsiriusContext>(options =>
+                })
+                .AddDbContext<dbsiriusContext>(options =>
                 {
                     options.UseSqlServer(confg.GetConnectionString("dbsirius"));
                 });
-            }
 
             return services;
         }
